@@ -20,6 +20,13 @@ After installation, you will need to install `react-navigation` and its peer dep
 ## Examples
 - example built-in library - [/example](/example)
 
+## Prior art
+
+This library is a continuation of our efforts to provide a first-class navigation for `bs-react-native` applications.
+
+If you are coming from `rebolt-navigation` or `reroute-native` (our previous attempts at solving this problem),
+please open an issue and let us know. We will help you find the best migration path to adopt this library. 
+
 ## Developing
 
 ```sh
