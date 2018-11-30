@@ -1,0 +1,32 @@
+{
+  "name": "bs-react-navigation",
+  "bsc-flags": [
+    "-bs-no-version-header",
+    "-bs-super-errors"
+  ],
+  "refmt": 3,
+  "bs-dependencies": [
+    "bs-react-native",
+    "reason-react"
+  ],
+  "reason": {
+    "react-jsx": 2
+  },
+  "namespace": true,
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "sources": [
+    {
+      "dir": "src",
+      "public": "all",
+      "subdirs": true
+    },
+    {
+      "dir": "example",
+      "type": "dev"
+    }
+  ]
+}
