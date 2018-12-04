@@ -6,9 +6,6 @@
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "prepublish": "npm run build",
-    "run-ios": "react-native run-ios --project-path \"./example/.native/ios\"",
-    "run-android": "react-native run-android --root \"./example/.native\"",
-    "start-example": "node ./node_modules/react-native/local-cli/cli.js start --root ./example",
     "test": "exit 0"
   },
   "keywords": [
@@ -30,18 +27,17 @@
     "url": "https://github.com/callstackincubator/bs-react-navigation/issues"
   },
   "homepage": "https://github.com/callstackincubator/rebolt-navigation#readme",
-  "devDependencies": {
+  "dependencies": {
     "bs-platform": "^4.0.7",
-    "bs-react-native": "^0.10.0",
-    "react": "^16.3.0-alpha.1",
-    "react-native": "^0.55.4",
-    "react-native-gesture-handler": "^1.0.9",
     "reason-react": "^0.5.3",
-    "react-navigation": "3.x"
+    "react-navigation": "^3.0.5"
+  },
+  "devDependencies": {
+    "bs-react-native": "^0.10.0",
+    "react": "^16.3.0-alpha.1"
   },
   "peerDependencies": {
     "bs-react-native": "^0.10.0",
-    "reason-react": "^0.5.3",
-    "react-navigation": "3.x"
+    "reason-react": "^0.5.3"
   }
 }

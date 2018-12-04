@@ -2,7 +2,7 @@
 .merlin
 .bsb.lock
 lib
-example/**/*.js
+example/lib/
 !example/index.js
 src/**/*.js
 *.bs.js
