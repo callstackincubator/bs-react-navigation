@@ -1,0 +1,17 @@
+{
+  "name": "bs-react-navigation-playground",
+  "bsc-flags": ["-bs-super-errors"],
+  "refmt": 3,
+  "reason": { "react-jsx": 2 },
+  "bs-dependencies": [
+    "reason-react",
+    "bs-react-native",
+    "../../bs-react-navigation"
+  ],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ]
+}
