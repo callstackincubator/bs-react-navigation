@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@react-navigation/core@3.0.1":
+"@react-navigation/core@3.0.1", "@react-navigation/core@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.0.1.tgz#9c513c65ae64aa8dee2777f66f547d488905140b"
   integrity sha512-bJgQHGhtczCmnfIibKuOjgSucLb6rJiz/EbpgqpCHLWg64D94OVEig7uQesmynCiaas1MN1FDSX2hrh2IB3kVw==
@@ -30,9 +30,9 @@ asap@~2.0.3:
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
 
 bs-platform@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.7.tgz#1a0bbf0fef439fef5f1a88ba60d5ac8a6d73570c"
-  integrity sha512-39ZXSugB03PznE7eSVwxq5z4S8Cn44r22T2eFd7rgFQ94HaB/mCNHXG0epF3mJLYhhhyPT9w3e/t+FAIjSdAkg==
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.8.tgz#d7b1ee9b21efdb549669dff797f578e229bcbe20"
+  integrity sha512-pTsVLNQ/CNuYUYmhlxhQyuJSACFi7v1avhX5qx6TxzAR3jXjMvImz8WdT+zzzJyisY2TTjMvCrJwhefT3Dliqw==
 
 bs-react-native@^0.10.0:
   version "0.10.0"
@@ -218,9 +218,9 @@ react-native-safe-area-view@^0.11.0:
     hoist-non-react-statics "^2.3.1"
 
 "react-native-screens@^1.0.0 || ^1.0.0-alpha":
-  version "1.0.0-alpha.16"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.16.tgz#e3651b7077ea8fa04e8dd3265ad9b87f1f77a758"
-  integrity sha512-t+/aq5jQa+Is6afiQHa1P+2UPnwPGY9NT0pSqNr2zQ5llCn8TcPq6GN8xDMuEc08g+y/9R5zWo32hlVStwWn1A==
+  version "1.0.0-alpha.17"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.17.tgz#8c1a7224b967c476670963fce7d06b946e7158e9"
+  integrity sha512-BvLtqbMpteXsY3XofCCX0c2LM6X14PhjN5FZraROEXuEnw8n8ImDTuXxUPDYZqq2Wjb1bLlm1zE5+c6dcGlY+Q==
 
 react-native-tab-view@^1.0.0, react-native-tab-view@^1.2.0:
   version "1.3.1"
@@ -229,17 +229,17 @@ react-native-tab-view@^1.0.0, react-native-tab-view@^1.2.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-navigation-drawer@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.4.tgz#41fbf71db108b3183e0c0351bf19ffee0aea10e7"
-  integrity sha512-P+3FgiYX2iQIkXeYCg7hOfg7u9fYBLWjqb1k6ILxML9VBimPXXM+87/lnIsfkZVOm4FIoH/ZAofbkPa7rYeJcQ==
+react-navigation-drawer@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.5.tgz#d8cc71bd1779186261f3c3754b11f29aa98bd4f5"
+  integrity sha512-WeGrXFn84R75IAt3ndDfkHw9FNvPsi4JPGO1iopqUoA/2tMPA6WJbhuE3dqmmEu3TZRjI+2LatCgpx00tT1kiQ==
   dependencies:
     react-native-tab-view "^1.2.0"
 
-react-navigation-stack@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.4.tgz#ec97ca34942e1001b6633690e26e33f86f26e0c3"
-  integrity sha512-wMLJkv1kUVXqdLp76n54mCLxp7slI7trLhprz0wTrwcunDjosQjE0AtyuPBS4o+nzM81CD5XGSeVkjyDblebgA==
+react-navigation-stack@1.0.5, react-navigation-stack@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.0.5.tgz#8aad306a069b080f32fcd48a11bfd6abfeb0a6b9"
+  integrity sha512-X/rsSKD+dvfuDitmAJvqelRjD9hmA5SP7uq7F6CncaUX6M2BLb8Q39KBxcjsBMLVHOSrfOoUq3HciwN1xSBxvg==
 
 react-navigation-tabs@1.0.1:
   version "1.0.1"
@@ -252,14 +252,14 @@ react-navigation-tabs@1.0.1:
     react-native-tab-view "^1.0.0"
 
 react-navigation@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.5.tgz#287cf7007c473bc73c6adb9a44b5737162ccd4d3"
-  integrity sha512-3CGiCBRv/E+CYAfxG619uM3RL41JWnv+GgVatz4r5uu2qoY7Ifb9CpW+CymRQ5JJc8RyoccSZfkuYx7nUeBpXw==
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-3.0.7.tgz#d0bd6138822eebaa500db6c1d2cba3c1d285ff44"
+  integrity sha512-6iS7/+tL1U/sc05DQ0fDfdSHZ4AO7Ng0JiYF8wHPR21RfNZb0Meh1/hadZvguMHDwSn65mgLiGpxGFUSliyI9A==
   dependencies:
     "@react-navigation/core" "3.0.1"
     "@react-navigation/native" "3.0.3"
-    react-navigation-drawer "1.0.4"
-    react-navigation-stack "1.0.4"
+    react-navigation-drawer "1.0.5"
+    react-navigation-stack "1.0.5"
     react-navigation-tabs "1.0.1"
 
 "react@>=15.0.0 || >=16.0.0", react@^16.3.0-alpha.1:
