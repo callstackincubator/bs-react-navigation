@@ -50,17 +50,7 @@ module Create = (Config: StackConfig) => {
     navigationOptions: ScreenOptions.t => screenOptions,
   };
 
-  [@bs.module "react-navigation"]
-  external _createStackNavigator:
-    (Js.Dict.t(routeConfig), navigatorConfig) => ReasonReact.reactElement =
-    "createStackNavigator";
-
-  [@bs.module "react-navigation"]
-  external _createAppContainer:
-    ReasonReact.reactElement => ReasonReact.reactElement =
-    "createAppContainer";
-
-  let containerDisplayName = "$bs-react-navigation_Container";
+  let containerDisplayName = "$bs-react-navigation_container";
 
   let makeNavigationProp = (navigation: NavigationProp.t) => {
     push: route =>
@@ -76,6 +66,7 @@ module Create = (Config: StackConfig) => {
     /** Params can be `null` in React Navigation, but we are always declaring them */
     let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
     let nav = makeNavigationProp(navigation);
+
     Config.getScreen(routeGet(params), nav);
   };
 
@@ -99,14 +90,24 @@ module Create = (Config: StackConfig) => {
           getCurrentScreen(options##navigation) |> snd,
     );
 
+  /* StackNavigator route */
   let routes = Js.Dict.empty();
   Js.Dict.set(routes, containerDisplayName, route);
 
+  /* StackNavigator config */
+  let config = navigatorConfig(~initialRouteName=containerDisplayName);
+
+  /* Router */
+  let router = ReactNavigationCore.stackRouter(routes, config);
+
+  /* navigator */
   let navigator =
-    _createAppContainer(
-      _createStackNavigator(
-        routes,
-        navigatorConfig(~initialRouteName=containerDisplayName),
-      ),
+    ReactNavigationCore.createNavigator(
+      ReactNavigationStack.stackView,
+      router,
+      config,
     );
+
+  /* Wrap StackNavigator with the AppContainer - temporary */
+  let render = ReactNavigationNative.createAppContainer(navigator);
 };

@@ -41,4 +41,4 @@ module Stack =
 /**
  * Exporting application entry-point, see `index.js` for details
  */
-let app = Stack.navigator;
+let app = Stack.render;
