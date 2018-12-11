@@ -9,7 +9,7 @@
     "watch": "bsb -make-world -clean-world -w"
   },
   "dependencies": {
-    "bs-platform": "^4.0.6",
+    "bs-platform": "^4.0.8",
     "bs-react-native": "^0.10.0",
     "expo": "^31.0.2",
     "react": "16.5.0",
@@ -19,7 +19,10 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
     "escape-string-regexp": "^1.0.5",
-    "react-navigation": "^3.0.5"
+    "react-navigation": "^3.0.5",
+    "react-navigation-stack": "~1.0.5",
+    "@react-navigation/core": "^3.0.1",
+    "@react-navigation/native": "^3.0.3"
   },
   "private": true
 }
