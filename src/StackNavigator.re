@@ -98,16 +98,16 @@ module Create = (Config: StackConfig) => {
   let config = navigatorConfig(~initialRouteName=containerDisplayName);
 
   /* Router */
-  let router = ReactNavigationCore.stackRouter(routes, config);
+  let router = ReactNavigation.Core.stackRouter(routes, config);
 
   /* navigator */
   let navigator =
-    ReactNavigationCore.createNavigator(
-      ReactNavigationStack.stackView,
+    ReactNavigation.Core.createNavigator(
+      ReactNavigation.Stack.stackView,
       router,
       config,
     );
 
   /* Wrap StackNavigator with the AppContainer - temporary */
-  let render = ReactNavigationNative.createAppContainer(navigator);
+  let render = ReactNavigation.Native.createAppContainer(navigator);
 };
