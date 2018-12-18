@@ -22,7 +22,8 @@
     "react-navigation": "^3.0.5",
     "react-navigation-stack": "~1.0.5",
     "@react-navigation/core": "^3.0.1",
-    "@react-navigation/native": "^3.0.3"
+    "@react-navigation/native": "^3.0.3",
+    "react-navigation-tabs": "1.0.1"
   },
   "private": true
 }
