@@ -54,14 +54,14 @@ module Tabs =
   TabNavigator.Create({
     type tabs = Config.tabs;
     type order = list(tabs)
-    let tabBarOptions = TabNavigator.tabBarOptions()
+    let tabBarOptions = TabNavigator.tabBarOptions(~activeTintColor="#ffF", ())
     let order = [Info, Profile, Settings]
     
     let getTab = (tab) =>
       {switch (tab) {
-      | Info => ("Info", () => <Tabs.Info />, TabNavigator.screenOptions(~title="Hey"))
-      | Profile => ("Profile",  () => <Tabs.Profile />, TabNavigator.screenOptions(~title="Profile"))
-      | Settings => ("Settings", () => <Tabs.Settings />,TabNavigator.screenOptions(~title="Settings"))
+      | Info => ("Info", () => <Tabs.Info />, TabNavigator.screenOptions(~title="Hey",()))
+      | Profile => ("Profile",  () => <Tabs.Profile />, TabNavigator.screenOptions(~title="Profile",()))
+      | Settings => ("Settings", () => <Tabs.Settings />,TabNavigator.screenOptions(~title="Settings",()))
       };}
   });
 

@@ -31,6 +31,26 @@ type tabBarOptions = {
   type screenOptions = {
     [@bs.optional]
     title: string,
+    [@bs.optional]
+    tabBarVisible: bool,
+    [@bs.optional]
+    tabBarIcon: ReasonReact.reactElement,
+    [@bs.optional]
+    tabBarLabel: string,
+    [@bs.optional]
+    tabBarButtonComponent: ReasonReact.componentSpec(
+      ReasonReact.stateless,
+      ReasonReact.stateless,
+      ReasonReact.noRetainedProps,
+      ReasonReact.noRetainedProps,
+      ReasonReact.actionless
+    ),
+    [@bs.optional]
+    tabBarAccessibilityLabel: string,
+    [@bs.optional]
+    tabBarTestID: string,
+    /* [@bs.optional]
+    tabBarOnPress: string */
   };
 
 
@@ -50,7 +70,7 @@ module type TabConfig = {
   type order = list(tabs);   
   let order: order;
   let tabBarOptions: tabBarOptions;
-  let getTab: (tabs) => (Js.Dict.key, unit => ReasonReact.reactElement, unit => screenOptions);
+  let getTab: (tabs) => (Js.Dict.key, unit => ReasonReact.reactElement, screenOptions);
 };
 
 
@@ -69,8 +89,8 @@ type navigatorConfig = {initialRouteName: string};
 
   let tabs = Config.order 
 	|> List.iter(tab => {
-      let (tabname, screen, screenOptions ) = Config.getTab(tab);
-	  Js.Dict.set(routes, tabname, routeConfig(~screen=screen, ~navigationOptions=screenOptions()));
+      let (tabname, screen, screenOptionsConfig ) = Config.getTab(tab);
+	  Js.Dict.set(routes, tabname, routeConfig(~screen=screen, ~navigationOptions=screenOptionsConfig));
   });
 
   let tabBarOptions = Js.Dict.empty();
