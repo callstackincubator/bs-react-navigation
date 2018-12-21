@@ -16,13 +16,13 @@ module Styles = {
 module Profile = {
   let compoennt = ReasonReact.statelessComponent("Profile");
 
-  let make = (~navigation: Config.tabNavigationProp, _children) => {
+  let make = (_children) => {
     ...compoennt,
     render: _self =>
       <SafeAreaView>
         <View style=Styles.container>
           <Text> {str("Profile")} </Text>
-          <Button title="elo" onPress={() => navigation.navigate(Settings)} />
+          <Button title="elo" onPress={() => Js.log("Profile")} />
         </View>
       </SafeAreaView>,
   };
@@ -30,14 +30,16 @@ module Profile = {
 
 module Info = {
   let compoennt = ReasonReact.statelessComponent("Info");
+ 
+  let make = (_children) => {
 
-  let make = (~navigation: Config.tabNavigationProp, _children) => {
+    
     ...compoennt,
     render: _self =>
       <SafeAreaView>
         <View style=Styles.container>
           <Text> {str("Info")} </Text>
-          <Button title="elo" onPress={() => navigation.navigate(Profile)} />
+          <Button title="elo" onPress={() => Js.log("Info")} />
         </View>
       </SafeAreaView>,
   };
@@ -46,13 +48,13 @@ module Info = {
 module Settings = {
   let compoennt = ReasonReact.statelessComponent("Settings");
 
-  let make = (~navigation: Config.tabNavigationProp, _children) => {
+  let make = (_children) => {
     ...compoennt,
     render: _self =>
       <SafeAreaView>
         <View style=Styles.container>
           <Text> {str("Settings")} </Text>
-          <Button title="elo" onPress={() => navigation.navigate(Info)} />
+          <Button title="elo" onPress={() => Js.log("Settings")} />
         </View>
       </SafeAreaView>,
   };

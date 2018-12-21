@@ -16,7 +16,10 @@ module Stack = {
   external stackView: ReasonReact.reactElement = "StackView";
 };
 
-module TabNavigator = {
-  [@bs.module "react-navigation"]
-  external create: 'a => ReasonReact.reactElement = "createBottomTabNavigator";
+module Tab = {
+  [@bs.module "react-navigation-tabs"]
+  external createBottomTabNavigator: ('a, 'b) => ReasonReact.reactElement = "";
+
+  [@bs.module "react-navigation-tabs"]
+  external createMaterialTopTabNavigator: 'a => ReasonReact.reactElement = ""
 };

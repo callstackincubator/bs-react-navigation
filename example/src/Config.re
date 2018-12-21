@@ -12,4 +12,4 @@ type tabs =
   | Profile
   | Settings;
 
-type tabNavigationProp = TabNavigator.navigation(tabs);
+type tabNavigationProp = TabNavigator.navigation(tabs)
