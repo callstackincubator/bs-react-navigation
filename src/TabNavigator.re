@@ -36,28 +36,17 @@ type screenOptions = {
   [@bs.optional]
   tabBarLabel: string,
   [@bs.optional]
-  tabBarButtonComponent:
-    ReasonReact.componentSpec(
-      ReasonReact.stateless,
-      ReasonReact.stateless,
-      ReasonReact.noRetainedProps,
-      ReasonReact.noRetainedProps,
-      ReasonReact.actionless,
-    ),
+  tabBarButtonComponent: ReasonReact.reactElement,
   [@bs.optional]
   tabBarAccessibilityLabel: string,
   [@bs.optional]
   tabBarTestID: string,
-  /* [@bs.optional]
-     tabBarOnPress: string */
+  [@bs.optional]
+  tabBarOnPress: string,
 };
 
 module NavigationProp = {
   type t;
-};
-
-module ScreenOptions = {
-  type t = {. "navigation": NavigationProp.t};
 };
 
 module type TabConfig = {
@@ -79,25 +68,26 @@ module Create = (Config: TabConfig) => {
     navigationOptions: screenOptions,
   };
 
-  let routes = Js.Dict.empty();
-
   let tabs =
     Config.order
-    |> List.iter(tab => {
+    |> List.map(tab => {
          let (tabname, screen, screenOptionsConfig) = Config.getTab(tab);
-         Js.Dict.set(
-           routes,
+
+         (
            tabname,
            routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
          );
-       });
+       })
+    |> Js.Dict.fromList;
 
-  let tabBarOptions = Js.Dict.empty();
-  Js.Dict.set(tabBarOptions, "tabBarOptions", Config.tabBarOptions);
+  let tabBarOptions = {
+    "swipeEnabled": true,
+    "tabBarOptions": Config.tabBarOptions,
+  };
 
   /* navigator */
   let navigator =
-    ReactNavigation.Tab.createBottomTabNavigator(routes, tabBarOptions);
+    ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions);
 
   /* Wrap StackNavigator with the AppContainer - temporary */
   let render = ReactNavigation.Native.createAppContainer(navigator);
