@@ -41,8 +41,8 @@ type screenOptions = {
   tabBarAccessibilityLabel: string,
   [@bs.optional]
   tabBarTestID: string,
-  [@bs.optional]
-  tabBarOnPress: string,
+  /* [@bs.optional]
+     tabBarOnPress: string, */
 };
 
 module NavigationProp = {
