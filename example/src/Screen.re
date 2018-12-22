@@ -24,10 +24,6 @@ let make =
           title="Go to details screen "
           onPress={() => navigation.push(UserDetails("Mike Grabowski"))}
         />
-        <Button
-          title="Go to Tab Navigator example"
-          onPress={() => navigation.push(Config.TabNavigator)}
-        />
       </View>
     </SafeAreaView>,
 };

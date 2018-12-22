@@ -1,29 +1,35 @@
-open BsReactNative;
 open BsReactNavigation;
+open Config;
 
-module Styles = {
-  open Style;
+module Tabs =
+  TabNavigator.Create({
+    type tabs = Config.tabs;
+    type order = list(tabs);
 
-  let container =
-    style([
-      marginTop(Pt(50.0)),
-      alignItems(Center),
-      justifyContent(Center),
-    ]);
-};
+    let tabBarOptions =
+      TabNavigator.tabBarOptions(~activeTintColor="#847", ());
 
-let compoennt = ReasonReact.statelessComponent("Info");
+    let order = [Info, Profile, Settings];
 
-let make = (~navigation: Config.navigationProp, _children) => {
-  ...compoennt,
-  render: _self =>
-    <SafeAreaView>
-      <View style=Styles.container>
-        <Text> {ReasonReact.string("Profile")} </Text>
-        <Button
-          title="Iti go Home"
-          onPress={() => navigation.push(Config.Home)}
-        />
-      </View>
-    </SafeAreaView>,
-};
+    let getTab = tab => {
+      switch (tab) {
+      | Info => (
+          "Info",
+          (() => <Tabs.Info />),
+          TabNavigator.screenOptions(~title="Info", ()),
+        )
+      | Profile => (
+          "Profile",
+          (() => <Tabs.Profile />),
+          TabNavigator.screenOptions(~title="Profile", ()),
+        )
+      | Settings => (
+          "Settings",
+          (() => <Tabs.Settings />),
+          TabNavigator.screenOptions(~title="Settings", ()),
+        )
+      };
+    };
+  });
+
+let render = Tabs.render;

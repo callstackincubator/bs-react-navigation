@@ -2,8 +2,7 @@ open BsReactNavigation;
 
 type route =
   | Home
-  | UserDetails(string)
-  | TabNavigator;
+  | UserDetails(string);
 
 type navigationProp = StackNavigator.navigation(route);
 
@@ -12,4 +11,4 @@ type tabs =
   | Profile
   | Settings;
 
-type tabNavigationProp = TabNavigator.navigation(tabs)
+type tabNavigationProp = TabNavigator.navigation(tabs);

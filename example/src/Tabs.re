@@ -11,12 +11,15 @@ module Styles = {
       alignItems(Center),
       justifyContent(Center),
     ]);
+  let profileContainer = style([backgroundColor(String("red"))]);
+  let infoContainer = style([backgroundColor(String("red"))]);
+  let settingsContainer = style([backgroundColor(String("red"))]);
 };
 
 module Profile = {
   let compoennt = ReasonReact.statelessComponent("Profile");
 
-  let make = (_children) => {
+  let make = _children => {
     ...compoennt,
     render: _self =>
       <SafeAreaView>
@@ -30,10 +33,8 @@ module Profile = {
 
 module Info = {
   let compoennt = ReasonReact.statelessComponent("Info");
- 
-  let make = (_children) => {
 
-    
+  let make = _children => {
     ...compoennt,
     render: _self =>
       <SafeAreaView>
@@ -48,7 +49,7 @@ module Info = {
 module Settings = {
   let compoennt = ReasonReact.statelessComponent("Settings");
 
-  let make = (_children) => {
+  let make = _children => {
     ...compoennt,
     render: _self =>
       <SafeAreaView>
