@@ -24,15 +24,25 @@
     react-native-safe-area-view "^0.11.0"
     react-native-screens "^1.0.0 || ^1.0.0-alpha"
 
+"@react-navigation/native@^3.0.3":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-3.1.0.tgz#e69db5501c8c3850bc60323119278b8d71bedaad"
+  integrity sha512-yXBG8i1hAHagdpMJ+2swSLgGBliIHeb2BIg6SwFzoy58oMbJ/Nw6Dz6+ul63PY5rn4Gzav6nROPYF3LYaLMcYw==
+  dependencies:
+    hoist-non-react-statics "^3.0.1"
+    react-native-gesture-handler "^1.0.12"
+    react-native-safe-area-view "^0.11.0"
+    react-native-screens "^1.0.0 || ^1.0.0-alpha"
+
 asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
 
-bs-platform@^4.0.7:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.8.tgz#d7b1ee9b21efdb549669dff797f578e229bcbe20"
-  integrity sha512-pTsVLNQ/CNuYUYmhlxhQyuJSACFi7v1avhX5qx6TxzAR3jXjMvImz8WdT+zzzJyisY2TTjMvCrJwhefT3Dliqw==
+bs-platform@^4.0.8:
+  version "4.0.14"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-4.0.14.tgz#1d9e9622d59ebf4d39408d07b41997201c5f9750"
+  integrity sha512-bxeMwZPnJ90r48SavF60pkzGn7heaoHn7IF7fpPdh5L8WZfCzf76AikH2zWJii4QahUeInvRN1tNPWQt3ckKJQ==
 
 bs-react-native@^0.10.0:
   version "0.10.0"
@@ -210,6 +220,15 @@ react-native-gesture-handler@^1.0.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-gesture-handler@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
+  integrity sha512-Qp5FjRmqUFeCevSu2IYQG1Xw+YXZ9YOzqze/ZxaIvWzYAoKsRchlgHhNoxvCqElp/befrnVFIjAEQyUxcmBKJw==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    invariant "^2.2.2"
+    prop-types "^15.5.10"
+
 react-native-safe-area-view@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
@@ -229,7 +248,7 @@ react-native-tab-view@^1.0.0, react-native-tab-view@^1.2.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-navigation-drawer@1.0.5:
+react-navigation-drawer@1.0.5, react-navigation-drawer@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-1.0.5.tgz#d8cc71bd1779186261f3c3754b11f29aa98bd4f5"
   integrity sha512-WeGrXFn84R75IAt3ndDfkHw9FNvPsi4JPGO1iopqUoA/2tMPA6WJbhuE3dqmmEu3TZRjI+2LatCgpx00tT1kiQ==

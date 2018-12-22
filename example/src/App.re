@@ -41,4 +41,5 @@ module Stack =
 /**
  * Exporting application entry-point, see `index.js` for details
  */
-let app = Stack.render;
+let drawer = DrawerExample.render;
+let app = drawer;
