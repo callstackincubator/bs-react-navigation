@@ -1,5 +1,5 @@
 open BsReactNative;
-
+open Config;
 let str = ReasonReact.string;
 
 module Styles = {
@@ -16,10 +16,10 @@ module Styles = {
 };
 
 module Profile = {
-  let compoennt = ReasonReact.statelessComponent("Profile");
+  let component = ReasonReact.statelessComponent("Profile");
 
-  let make = _children => {
-    ...compoennt,
+  let make = (~navigation: tabNavigationProp, _children) => {
+    ...component,
     render: _self =>
       <SafeAreaView
         style={StyleSheet.flatten([
@@ -32,10 +32,10 @@ module Profile = {
 };
 
 module Info = {
-  let compoennt = ReasonReact.statelessComponent("Info");
+  let component = ReasonReact.statelessComponent("Info");
 
-  let make = _children => {
-    ...compoennt,
+  let make = (~navigation: tabNavigationProp, _children) => {
+    ...component,
     render: _self =>
       <SafeAreaView
         style={StyleSheet.flatten([Styles.container, Styles.infoContainer])}>
@@ -45,10 +45,10 @@ module Info = {
 };
 
 module Settings = {
-  let compoennt = ReasonReact.statelessComponent("Settings");
+  let component = ReasonReact.statelessComponent("Settings");
 
-  let make = _children => {
-    ...compoennt,
+  let make = (~navigation: tabNavigationProp, _children) => {
+    ...component,
     render: _self =>
       <SafeAreaView
         style={StyleSheet.flatten([
@@ -56,6 +56,7 @@ module Settings = {
           Styles.settingsContainer,
         ])}>
         <View> <Text style=Styles.titile> {str("Settings")} </Text> </View>
+        <Button onPress={() => navigation.navigate("Profile")} title="info"/>
       </SafeAreaView>,
   };
 };

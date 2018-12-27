@@ -7,6 +7,7 @@ open BsReactNavigation;
 open Config;
 
 module Stack =
+
   StackNavigator.Create({
     open StackNavigator;
 
@@ -19,6 +20,7 @@ module Stack =
       * Initial route to start with. Has to be one of `route` variants.
       */
     let initialRoute = Home;
+
 
     /**
       * Returns a screen for a given route and its options.
@@ -35,6 +37,7 @@ module Stack =
           <Screen navigation text={"Browsing profile of: " ++ userId} />,
           screenOptions(~title="Hello " ++ userId, ()),
         )
+      | TabExample => (<TabExample navigation/>, screenOptions())
       };
   });
 

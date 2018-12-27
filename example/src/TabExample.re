@@ -15,17 +15,17 @@ module Tabs =
       switch (tab) {
       | Info => (
           "Info",
-          (() => <Tabs.Info />),
+          ((navigation) => <Tabs.Info navigation/>),
           TabNavigator.screenOptions(~title="Info", ()),
         )
       | Profile => (
           "Profile",
-          (() => <Tabs.Profile />),
+          ((navigation) => <Tabs.Profile navigation/>),
           TabNavigator.screenOptions(~title="Profile", ()),
         )
       | Settings => (
           "Settings",
-          (() => <Tabs.Settings />),
+          ((navigation) => <Tabs.Settings navigation/>),
           TabNavigator.screenOptions(~title="Settings", ()),
         )
       };
@@ -33,3 +33,8 @@ module Tabs =
   });
 
 let render = Tabs.render;
+
+let make = (~navigation, _children) => {
+  ...(ReasonReact.statelessComponent("TabExample")),
+  render: _ => Tabs.render
+}

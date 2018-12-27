@@ -1,5 +1,8 @@
 open BsReactNative;
-type navigation('a) = {navigate: 'a => unit};
+type navigation = {
+  navigate: string => unit,
+  goBack: unit => unit,
+};
 
 [@bs.deriving abstract]
 type tabBarOptions = {
@@ -55,16 +58,17 @@ module type TabConfig = {
   let order: order;
   let tabBarOptions: tabBarOptions;
   let getTab:
-    tabs => (Js.Dict.key, unit => ReasonReact.reactElement, screenOptions);
+    tabs => (Js.Dict.key, navigation => ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
   [@bs.deriving abstract]
   type navigatorConfig = {initialRouteName: string};
+  
 
   [@bs.deriving abstract]
   type routeConfig = {
-    screen: unit => ReasonReact.reactElement,
+    screen: navigation => ReasonReact.reactElement,
     navigationOptions: screenOptions,
   };
 
@@ -72,7 +76,6 @@ module Create = (Config: TabConfig) => {
     Config.order
     |> List.map(tab => {
          let (tabname, screen, screenOptionsConfig) = Config.getTab(tab);
-
          (
            tabname,
            routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
@@ -82,6 +85,7 @@ module Create = (Config: TabConfig) => {
 
   let tabBarOptions = {
     "swipeEnabled": true,
+    "animationEnabled": true,
     "tabBarOptions": Config.tabBarOptions,
   };
 
