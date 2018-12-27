@@ -13,7 +13,8 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: Config.navigation, ~text: string="Hi!", _children) => {
+let make =
+    (~navigation: Config.navigationProp, ~text: string="Hi!", _children) => {
   ...component,
   render: _self =>
     <SafeAreaView>
@@ -22,6 +23,10 @@ let make = (~navigation: Config.navigation, ~text: string="Hi!", _children) => {
         <Button
           title="Go to details screen "
           onPress={() => navigation.push(UserDetails("Mike Grabowski"))}
+        />
+        <Button 
+          title="Go to tab example"
+          onPress={() => navigation.push(TabExample)}
         />
       </View>
     </SafeAreaView>,
