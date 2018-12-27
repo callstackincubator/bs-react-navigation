@@ -11,3 +11,9 @@ type loginRoute =
   | LoggedIn
 
 type loginNavigation = SwitchNavigator.navigation(loginRoute);
+
+type item =
+  | Dashbord
+  | Settings;
+
+type drawerNavigationProp = DrawerNavigation.navigation(route);

@@ -19,7 +19,14 @@ module Stack = {
   external stackView: ReasonReact.reactElement = "StackView";
 };
 
+
 module Switch = {
   [@bs.module "@react-navigation/core"]
   external switchView: ReasonReact.reactElement = "SwitchView";
+};
+
+module Drawer = {
+  [@bs.module "react-navigation-drawer"]
+  external create: ('a, 'b) => ReasonReact.reactElement =
+    "createDrawerNavigator";
 };

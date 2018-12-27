@@ -28,12 +28,13 @@
   },
   "homepage": "https://github.com/callstackincubator/rebolt-navigation#readme",
   "dependencies": {
-    "bs-platform": "^4.0.8",
-    "reason-react": "^0.5.3",
-    "react-navigation": "^3.0.5",
-    "react-navigation-stack": "^1.0.5",
     "@react-navigation/core": "^3.0.1",
-    "@react-navigation/native": "^3.0.3"
+    "@react-navigation/native": "^3.0.3",
+    "bs-platform": "^4.0.8",
+    "react-navigation": "^3.0.5",
+    "react-navigation-drawer": "^1.0.5",
+    "react-navigation-stack": "^1.0.5",
+    "reason-react": "^0.5.3"
   },
   "devDependencies": {
     "bs-react-native": "^0.10.0",

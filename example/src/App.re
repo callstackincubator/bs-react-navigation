@@ -38,9 +38,6 @@ module Stack =
       };
   });
 
-/**
- * Exporting application entry-point, see `index.js` for details
- */
 let app = Stack.render;
 
 module Switch =
@@ -57,4 +54,7 @@ module Switch =
       };
   });
 
-let app = Switch.render;
+let switchNavigator = Switch.render;
+
+let drawer = DrawerExample.render;
+let app = drawer;
