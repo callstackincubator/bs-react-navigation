@@ -6,6 +6,12 @@ type route =
 
 type navigation = StackNavigator.navigation(route);
 
+type loginRoute = 
+  | Login
+  | LoggedIn
+
+type loginNavigation = SwitchNavigator.navigation(loginRoute);
+
 type item =
   | Dashbord
   | Settings;
