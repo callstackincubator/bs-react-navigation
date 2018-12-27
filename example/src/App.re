@@ -42,3 +42,19 @@ module Stack =
  * Exporting application entry-point, see `index.js` for details
  */
 let app = Stack.render;
+
+module Switch =
+  SwitchNavigator.Create({
+    open SwitchNavigator;
+
+    type route = Config.loginRoute;
+    let initialRoute = Login;
+
+    let getScreen = (route, navigation) =>
+      switch (route) {
+      | Login => (<Login navigation />, screenOptions())
+      | LoggedIn => (<LoggedIn navigation />, screenOptions())
+      };
+  });
+
+let app = Switch.render;
