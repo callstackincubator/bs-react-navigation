@@ -18,6 +18,7 @@ yarn add bs-react-navigation
 After installation, you will need to install `react-navigation` and its peer dependencies. Please follow official installation instructions [here](https://reactnavigation.org/docs/en/getting-started.html#installation).
 
 ## Examples
+
 - example built-in library - [/example](/example)
 
 ## Prior art
@@ -25,26 +26,34 @@ After installation, you will need to install `react-navigation` and its peer dep
 This library is a continuation of our efforts to provide a first-class navigation for `bs-react-native` applications.
 
 If you are coming from `rebolt-navigation` or `reroute-native` (our previous attempts at solving this problem),
-please open an issue and let us know. We will help you find the best migration path to adopt this library. 
+please open an issue and let us know. We will help you find the best migration path to adopt this library.
 
-## Developing
+## Developing example app
+
+Inside the root folder, run BS build script:
 
 ```sh
-# Starts Metro (React Native Packager)
-npm run start-example
+yarn start
+```
 
-# Runs the app on iOS/Android
-npm run run-ios
+next, go to the example app and start the watch script for building the ReasonML code:
 
-# Watches for source build changes
-npm start
+```sh
+yarn watch
+```
+
+The last step is to start the [Expo](https://expo.io/learn) packager inside your example app
+
+```sh
+yarn start
 ```
 
 ## License
 
-MIT (c) 2018 Callstack
+See Reason license in [LICENSE.txt](LICENSE.txt).
 
 <!-- badges -->
+
 [build-badge]: https://img.shields.io/circleci/project/github/callstackincubator/rebolt-navigation/master.svg?style=flat-square
 [build]: https://circleci.com/gh/callstackincubator/rebolt-navigation
 [version-badge]: https://img.shields.io/npm/v/rebolt-navigation.svg?style=flat-square
