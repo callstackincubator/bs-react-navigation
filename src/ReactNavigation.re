@@ -21,10 +21,10 @@ module Stack = {
 
 module Tab = {
   [@bs.module "react-navigation-tabs"]
-  external createBottomTabNavigator: ('a, 'b) => ReasonReact.reactElement = "";
+  external createBottomTabNavigator: ('a, 'b) => ReasonReact.reactClass = "";
 
   [@bs.module "react-navigation-tabs"]
-  external createMaterialTopTabNavigator: 'a => ReasonReact.reactElement = ""
+  external createMaterialTopTabNavigator: 'a => ReasonReact.reactClass = ""
 };
 
 module Switch = {

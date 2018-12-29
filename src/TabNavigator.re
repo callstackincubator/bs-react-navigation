@@ -56,12 +56,14 @@ module type TabConfig = {
   type tabs;
   type order = list(tabs);
   let order: order;
+  let containerName: string;
   let tabBarOptions: tabBarOptions;
   let getTab:
     tabs => (Js.Dict.key, navigation => ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
+  
   [@bs.deriving abstract]
   type navigatorConfig = {initialRouteName: string};
   
@@ -89,10 +91,21 @@ module Create = (Config: TabConfig) => {
     "tabBarOptions": Config.tabBarOptions,
   };
 
-  /* navigator */
-  let navigator =
-    ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions);
+  let navigator = ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions)
 
-  /* Wrap StackNavigator with the AppContainer - temporary */
-  let render = ReactNavigation.Native.createAppContainer(navigator);
+  let navigatorElement = ReasonReact.createElement(navigator, [||])
+
+  module Container = {
+    let component = ReasonReact.statelessComponent(Config.containerName);
+
+    let make = (_children) => {
+      ...component,
+      render: _self => navigatorElement
+    };
+  };
+  
+
+  let make = Container.make
+  
 };
+

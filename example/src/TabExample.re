@@ -6,6 +6,8 @@ module Tabs =
     type tabs = Config.tabs;
     type order = list(tabs);
 
+    let containerName="TabExample";
+
     let tabBarOptions =
       TabNavigator.tabBarOptions(~activeTintColor="#847", ());
 
@@ -32,9 +34,4 @@ module Tabs =
     };
   });
 
-let render = Tabs.render;
-
-let make = (~navigation, _children) => {
-  ...(ReasonReact.statelessComponent("TabExample")),
-  render: _ => Tabs.render
-}
+let make = Tabs.make
