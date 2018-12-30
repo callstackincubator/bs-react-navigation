@@ -59,7 +59,7 @@ module type TabConfig = {
   let containerName: string;
   let tabBarOptions: tabBarOptions;
   let getTab:
-    tabs => (Js.Dict.key, navigation => ReasonReact.reactElement, screenOptions);
+    (tabs,navigation) => (Js.Dict.key, unit => ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
@@ -70,14 +70,27 @@ module Create = (Config: TabConfig) => {
 
   [@bs.deriving abstract]
   type routeConfig = {
-    screen: navigation => ReasonReact.reactElement,
+    screen: unit => ReasonReact.reactElement,
     navigationOptions: screenOptions,
   };
+
+  module NavigationProp = {
+
+    [@bs.send] external navigate: (string) => unit = "navigate";
+
+
+    [@bs.send] external goBack: (unit) => unit = "goBack";
+  };
+
+  let makeNavigationProp = () => {
+      navigate: routeName => NavigationProp.navigate(routeName),
+      goBack: () => NavigationProp.goBack(),
+    };
 
   let tabs =
     Config.order
     |> List.map(tab => {
-         let (tabname, screen, screenOptionsConfig) = Config.getTab(tab);
+         let (tabname, screen, screenOptionsConfig) = Config.getTab(tab, makeNavigationProp());
          (
            tabname,
            routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
@@ -93,19 +106,7 @@ module Create = (Config: TabConfig) => {
 
   let navigator = ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions)
 
-  let navigatorElement = ReasonReact.createElement(navigator, [||])
-
-  module Container = {
-    let component = ReasonReact.statelessComponent(Config.containerName);
-
-    let make = (_children) => {
-      ...component,
-      render: _self => navigatorElement
-    };
-  };
-  
-
-  let make = Container.make
+  let make = ReactNavigation.Native.createAppContainer(navigator)
   
 };
 

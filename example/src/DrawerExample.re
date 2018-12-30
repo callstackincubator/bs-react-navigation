@@ -9,10 +9,8 @@ module Drawer =
     let drawerOptions =
       DrawerNavigation.drawerOptions(~activeTintColor="#847", ());
 
-    let order = [Dashbord, Settings];
-
-    let getItem = tab =>
-      switch (tab) {
+    let getItem = drawerItem =>
+      switch (drawerItem) {
       | Dashbord => (
           "Dashbord",
           (() => <Items.Dashboard />),

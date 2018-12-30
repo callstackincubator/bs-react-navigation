@@ -13,25 +13,30 @@ module Tabs =
 
     let order = [Info, Profile, Settings];
 
-    let getTab = tab => {
+    let getTab = (tab, navigationProp) => {
       switch (tab) {
       | Info => (
           "Info",
-          ((navigation) => <Tabs.Info navigation/>),
+          (() => <Tabs.Info navigation={navigationProp}/>),
           TabNavigator.screenOptions(~title="Info", ()),
         )
       | Profile => (
           "Profile",
-          ((navigation) => <Tabs.Profile navigation/>),
+          (() => <Tabs.Profile navigation={navigationProp}/>),
           TabNavigator.screenOptions(~title="Profile", ()),
         )
       | Settings => (
           "Settings",
-          ((navigation) => <Tabs.Settings navigation/>),
+          (() => <Tabs.Settings navigation={navigationProp}/>),
           TabNavigator.screenOptions(~title="Settings", ()),
         )
       };
     };
   });
 
-let make = Tabs.make
+let render = Tabs.make;
+
+let make = (~navigation, _children) => {
+  ...(ReasonReact.statelessComponent("TabExample")),
+  render: _ => ReasonReact.createElement(render,[||])
+}
