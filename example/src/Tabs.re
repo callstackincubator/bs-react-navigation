@@ -56,7 +56,7 @@ module Settings = {
           Styles.settingsContainer,
         ])}>
         <View> <Text style=Styles.titile> {str("Settings")} </Text> </View>
-        <Button onPress={() => navigation.navigate("Profile")} title="info"/>
+        <Button onPress={() => navigation.navigate("Profile")} title="info" />
       </SafeAreaView>,
   };
 };

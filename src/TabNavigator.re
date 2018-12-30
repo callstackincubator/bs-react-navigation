@@ -59,14 +59,13 @@ module type TabConfig = {
   let containerName: string;
   let tabBarOptions: tabBarOptions;
   let getTab:
-    (tabs,navigation) => (Js.Dict.key, unit => ReasonReact.reactElement, screenOptions);
+    (tabs, navigation) =>
+    (Js.Dict.key, unit => ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
-  
   [@bs.deriving abstract]
   type navigatorConfig = {initialRouteName: string};
-  
 
   [@bs.deriving abstract]
   type routeConfig = {
@@ -75,22 +74,21 @@ module Create = (Config: TabConfig) => {
   };
 
   module NavigationProp = {
+    [@bs.send] external navigate: string => unit = "navigate";
 
-    [@bs.send] external navigate: (string) => unit = "navigate";
-
-
-    [@bs.send] external goBack: (unit) => unit = "goBack";
+    [@bs.send] external goBack: unit => unit = "goBack";
   };
 
   let makeNavigationProp = () => {
-      navigate: routeName => NavigationProp.navigate(routeName),
-      goBack: () => NavigationProp.goBack(),
-    };
+    navigate: routeName => NavigationProp.navigate(routeName),
+    goBack: () => NavigationProp.goBack(),
+  };
 
   let tabs =
     Config.order
     |> List.map(tab => {
-         let (tabname, screen, screenOptionsConfig) = Config.getTab(tab, makeNavigationProp());
+         let (tabname, screen, screenOptionsConfig) =
+           Config.getTab(tab, makeNavigationProp());
          (
            tabname,
            routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
@@ -104,9 +102,8 @@ module Create = (Config: TabConfig) => {
     "tabBarOptions": Config.tabBarOptions,
   };
 
-  let navigator = ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions)
+  let navigator =
+    ReactNavigation.Tab.createBottomTabNavigator(tabs, tabBarOptions);
 
-  let make = ReactNavigation.Native.createAppContainer(navigator)
-  
+  let make = ReactNavigation.Native.createAppContainer(navigator);
 };
-
