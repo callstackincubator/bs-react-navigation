@@ -1,4 +1,4 @@
-let stack = StackExample.render;
+let stack = <StackExample />;
 let tab = TabExample.render;
 let drawer = DrawerExample.render;
 

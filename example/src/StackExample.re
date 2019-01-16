@@ -52,8 +52,8 @@ module Stack =
           />,
           screenOptions(~title="Hello " ++ userId, ()),
         )
-      | TabExample => (<TabExample navigation />, screenOptions())
+      | NestedStack => (SwitchExample.render, screenOptions(~title="Nested Stack", ()))
       };
   });
 
-let render = Stack.render;
+let render = Stack.make;

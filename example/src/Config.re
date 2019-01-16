@@ -3,7 +3,7 @@ open BsReactNavigation;
 type route =
   | Home
   | UserDetails(string)
-  | TabExample;
+  | NestedStack;
 
 type tabs =
   | Info
