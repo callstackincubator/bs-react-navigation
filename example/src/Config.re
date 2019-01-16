@@ -5,8 +5,6 @@ type route =
   | UserDetails(string)
   | TabExample;
 
-type navigationProp = StackNavigator.navigation(route);
-
 type tabs =
   | Info
   | Profile

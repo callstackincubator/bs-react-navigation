@@ -1,18 +1,18 @@
 open BsReactNavigation;
+open BsReactNative;
 
 /**
   * Route and Navigation types are kept in a separate module to
   * handle circular references between modules
   */
-open Config;
-
 module Stack =
   StackNavigator.Create({
     open StackNavigator;
+    open Config;
 
     /**
-      * StackNavigator requires `route` type to be defined.
-      */
+    * StackNavigator requires `route` type to be defined.
+    */
     type route = Config.route;
 
     /**
@@ -30,9 +30,26 @@ module Stack =
       */
     let getScreen = (route, navigation) =>
       switch (route) {
-      | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
+      | Home => (
+          <Screen
+            button={
+              <Button
+                title="Go to details screen"
+                onPress=(
+                  () => navigation.push(UserDetails("Mike Grabowski"))
+                )
+              />
+            }
+          />,
+          screenOptions(~title="Home", ()),
+        )
       | UserDetails(userId) => (
-          <Screen navigation text={"Browsing profile of: " ++ userId} />,
+          <Screen
+            button={
+              <Button title="Go back" onPress=(() => navigation.pop()) />
+            }
+            text={"Browsing profile of: " ++ userId}
+          />,
           screenOptions(~title="Hello " ++ userId, ()),
         )
       | TabExample => (<TabExample navigation />, screenOptions())

@@ -2,7 +2,7 @@ open ReactNavigation;
 
 type navigation('a) = {
   push: 'a => unit,
-  pop: 'a => unit,
+  pop: unit => unit,
 };
 
 [@bs.deriving abstract]
@@ -44,7 +44,7 @@ module Create = (Config: StackConfig) => {
         containerDisplayName,
         routeProps(~route),
       ),
-    pop: _route => (),
+    pop: () => (),
   };
 
   let getCurrentScreen = (navigation:  Navigation.t) => {
