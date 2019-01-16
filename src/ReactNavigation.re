@@ -37,3 +37,14 @@ module Drawer = {
   external create: ('a, 'b) => ReasonReact.reactElement =
     "createDrawerNavigator";
 };
+
+module Navigation {
+  type t;
+  module State = {
+    type t;
+    [@bs.get "params"] external getParams: t => option('a) = "";
+  };
+  [@bs.send] external push: (t, string, 'a) => unit = "push";
+  [@bs.get "state"] external getStateProp: t => State.t = "";
+  let getParams = t => getStateProp(t) |> State.getParams;
+};
