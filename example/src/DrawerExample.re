@@ -3,26 +3,18 @@ open Config;
 
 module Drawer =
   DrawerNavigation.Create({
+    open DrawerNavigation;
+
     type item = Config.item;
 
     let items = [Dashbord, Settings];
-    let drawerOptions =
-      DrawerNavigation.drawerOptions(~activeTintColor="#847", ());
 
-    let order = [Dashbord, Settings];
+    let drawerOptions = drawerOptions(~activeTintColor="#847", ());
 
     let getItem = tab =>
       switch (tab) {
-      | Dashbord => (
-          "Dashbord",
-          (() => <Items.Dashboard />),
-          DrawerNavigation.screenOptions(~title="Info", ()),
-        )
-      | Settings => (
-          "Settings",
-          (() => <Items.Settings />),
-          DrawerNavigation.screenOptions(~title="Settings", ()),
-        )
+      | Dashbord => (<Items.Dashboard />, screenOptions(~title="Info___"))
+      | Settings => (<Items.Settings />, screenOptions(~title="Settings"))
       };
   });
 
