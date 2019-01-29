@@ -7,7 +7,11 @@
 
 > A fast, declarative navigation for React Native, based on React Navigation
 
-### Installation
+## Status
+
+Currently we are not supporting the nested navigators.
+
+## Installation
 
 Open a Terminal in your project's folder and run,
 
@@ -20,6 +24,61 @@ After installation, you will need to install `react-navigation` and its peer dep
 ## Examples
 
 - example built-in library - [/example](/example)
+
+## API's
+
+All of the navigators has similar API configuration flow.
+
+## Stack navigator
+
+First of all, create a config file like `Config.re` and there define your all routes:
+
+> It is needed because ReasonML is aware of circular dependencies.
+
+```ReasonML
+type route =
+  | Home
+  | UserDetails(string);
+```
+
+- `Home` - route without custom parameters
+- `User(string)` - route with parameters and their type is `string`
+
+Now, after we create navigator routes, we need to create navigator type, which is created from a list of your routes.
+
+```ReasonML
+type navigationProp = StackNavigator.navigation(route);
+```
+
+The next step is to create actual navigator, for that, create a file where you will be put your navigator configuration. You need to use a functor `Create` from `StackNavigator` module and pass a configuration module which needs to include a few pieces:
+
+- `route` - list of your routes, use variant from your `Config.re`
+- `initialRoute` - the first screen of your navigation state
+- `getScreen` - it's a function which as a paramiters get the `currentRoute` and `navigation` props. As a return you should create a tuple where first elelment is a screen component and the second is screen configuration.
+
+Full example:
+
+```ReasonML
+open Config;
+
+module Stack =
+  StackNavigator.Create({
+    open StackNavigator;
+
+    type route = Config.route;
+
+    let initialRoute = Home;
+
+    let getScreen = (route, navigation) =>
+      switch (route) {
+      | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
+      | UserDetails(userId) => (
+          <Screen navigation text={"Browsing profile of: " ++ userId} />,
+          screenOptions(~title="Hello " ++ userId, ()),
+        )
+      };
+  });
+```
 
 ## Prior art
 
