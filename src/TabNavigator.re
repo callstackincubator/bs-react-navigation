@@ -30,7 +30,6 @@ type tabBarOptions = {
 
 [@bs.deriving abstract]
 type screenOptions = {
-  [@bs.optional]
   title: string,
   [@bs.optional]
   tabBarVisible: bool,
@@ -57,28 +56,30 @@ module type TabConfig = {
   type order = list(tabs);
   let order: order;
   let tabBarOptions: tabBarOptions;
-  let getTab:
-    tabs => (Js.Dict.key, navigation => ReasonReact.reactElement, screenOptions);
+  let getTab: tabs => (ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
   [@bs.deriving abstract]
   type navigatorConfig = {initialRouteName: string};
-  
 
   [@bs.deriving abstract]
   type routeConfig = {
-    screen: navigation => ReasonReact.reactElement,
+    screen: unit => ReasonReact.reactElement,
     navigationOptions: screenOptions,
   };
 
   let tabs =
     Config.order
     |> List.map(tab => {
-         let (tabname, screen, screenOptionsConfig) = Config.getTab(tab);
+         let (screen, screenOptionsConfig) = Config.getTab(tab);
+
          (
-           tabname,
-           routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
+           titleGet(screenOptionsConfig),
+           routeConfig(
+             ~screen=() => screen,
+             ~navigationOptions=screenOptionsConfig,
+           ),
          );
        })
     |> Js.Dict.fromList;
