@@ -69,8 +69,8 @@ module Stack =
 
     let initialRoute = Home;
 
-    let getScreen = (route, navigation) =>
-      switch (route) {
+    let getScreen = (currentRoute, navigation) =>
+      switch (currentRoute) {
       | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
       | UserDetails(userId) => (
           <Screen navigation text={"Browsing profile of: " ++ userId} />,
@@ -78,6 +78,110 @@ module Stack =
         )
       };
   });
+```
+
+### Switch Navigator API
+
+The API is almost the same as in Stack Navigator
+
+```ReasonML
+module Switch =
+  SwitchNavigator.Create({
+    open SwitchNavigator;
+
+    type route = Config.route;
+
+    let initialRoute = Login;
+
+    let getScreen = (currentRoute, navigation) =>
+      switch (currentRoute) {
+      | Login => (<Login navigation />, screenOptions())
+      | LoggedIn => (<LoggedIn navigation />, screenOptions())
+      };
+  });
+```
+
+### Drawer Navigator API
+
+Drawer needs one additional setting compared to the Switch or Stack Navigator.
+
+This is list of items that drawer needs to render itself:
+
+```ReasonML
+let items: list(item);
+```
+
+Full example:
+
+```ReasonML
+module Drawer =
+  DrawerNavigation.Create({
+    open DrawerNavigation;
+    type item = Config.item;
+
+    let items = [Dashbord, Settings];
+    let drawerOptions = drawerOptions(());
+
+    let order = [Dashbord, Settings];
+
+    let getItem = currentItem =>
+      switch (currentItem) {
+      | Dashbord => (
+          <Items.Dashboard />,
+          screenOptions(~title="Info",
+        )
+      | Settings => (<Items.Settings />,
+          screenOptions(~title="Settings",
+        )
+      };
+  });
+
+```
+
+### Tab Navigator API
+
+Tab needs one additional setting compared to the Switch or Stack Navigator.
+
+This is list of items that drawer needs to render itself:
+
+```ReasonML
+let order: list(tabs);
+```
+
+Full example:
+
+```ReasonML
+module Tabs =
+  TabNavigator.Create({
+    open TabNavigator;
+
+    type tabs = Config.tabs;
+    type order = list(tabs);
+
+    let tabBarOptions =
+      tabBarOptions(~activeTintColor="#847", ());
+
+    let order = [Info, Profile, Settings];
+
+    let getTab = tab => {
+      switch (tab) {
+      | Info => (
+          <Tabs.Info navigation/>,
+          screenOptions(~title="Info"),
+        )
+      | Profile => (
+          <Tabs.Profile navigation/>,
+          screenOptions(~title="Profile"),
+        )
+      | Settings => (
+          <Tabs.Settings navigation/>,
+          screenOptions(~title="Settings"),
+        )
+      };
+    };
+  });
+
+
 ```
 
 ## Prior art
