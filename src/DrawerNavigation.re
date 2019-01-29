@@ -3,11 +3,15 @@ type navigation('a) = {navigate: 'a => unit};
 [@bs.deriving abstract]
 type drawerOptions = {
   [@bs.optional]
-  activeTintColor: string,
+  drawerWidth: int,
+  [@bs.optional]
+  useNativeAnimations: bool,
+  [@bs.optional]
+  drawerBackgroundColor: string,
 };
 
 [@bs.deriving abstract]
-type screenOptions = {title: string};
+type screenOptions = {drawerLabel: string};
 
 module type TabConfig = {
   type item;
@@ -32,7 +36,7 @@ module Create = (Config: TabConfig) => {
          let (screen, screenOptionsConfig) = Config.getItem(tab);
 
          (
-           titleGet(screenOptionsConfig),
+           drawerLabelGet(screenOptionsConfig),
            routeConfig(
              ~screen=() => screen,
              ~navigationOptions=screenOptionsConfig,

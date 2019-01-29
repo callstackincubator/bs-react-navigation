@@ -8,12 +8,15 @@ module Drawer =
     type item = Config.item;
 
     let items = [Dashbord, Settings];
-    let drawerOptions = drawerOptions(~activeTintColor="#847", ());
+    let drawerOptions = drawerOptions(~drawerWidth=200, ());
 
     let getItem = currentItem =>
       switch (currentItem) {
-      | Dashbord => (<Items.Dashboard />, screenOptions(~title="Info"))
-      | Settings => (<Items.Settings />, screenOptions(~title="Settings"))
+      | Dashbord => (<Items.Dashboard />, screenOptions(~drawerLabel="Info"))
+      | Settings => (
+          <Items.Settings />,
+          screenOptions(~drawerLabel="Settings"),
+        )
       };
   });
 
