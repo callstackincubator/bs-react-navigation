@@ -18,14 +18,11 @@ module Styles = {
 module Profile = {
   let component = ReasonReact.statelessComponent("Profile");
 
-  let make = (~navigation: tabNavigationProp, _children) => {
+  let make = _children => {
     ...component,
     render: _self =>
       <SafeAreaView
-        style={StyleSheet.flatten([
-          Styles.container,
-          Styles.profileContainer,
-        ])}>
+        style={StyleSheet.flatten([Styles.container, Styles.profileContainer])}>
         <View> <Text style=Styles.titile> {str("Profile")} </Text> </View>
       </SafeAreaView>,
   };
@@ -34,7 +31,7 @@ module Profile = {
 module Info = {
   let component = ReasonReact.statelessComponent("Info");
 
-  let make = (~navigation: tabNavigationProp, _children) => {
+  let make = _children => {
     ...component,
     render: _self =>
       <SafeAreaView
@@ -47,7 +44,7 @@ module Info = {
 module Settings = {
   let component = ReasonReact.statelessComponent("Settings");
 
-  let make = (~navigation: tabNavigationProp, _children) => {
+  let make = _children => {
     ...component,
     render: _self =>
       <SafeAreaView
@@ -55,8 +52,7 @@ module Settings = {
           Styles.container,
           Styles.settingsContainer,
         ])}>
-        <View> <Text style=Styles.titile> {str("Settings")} </Text> </View>
-        <Button onPress={() => navigation.navigate("Profile")} title="info"/>
+        <View> <Text style=Styles.titile> {str("Settings")} </Text> </View>        
       </SafeAreaView>,
   };
 };

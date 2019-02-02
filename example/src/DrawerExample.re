@@ -1,27 +1,21 @@
 open BsReactNavigation;
-open Config;
 
 module Drawer =
   DrawerNavigation.Create({
+    open Config;
+    open DrawerNavigation;
+
     type item = Config.item;
 
     let items = [Dashbord, Settings];
-    let drawerOptions =
-      DrawerNavigation.drawerOptions(~activeTintColor="#847", ());
+    let drawerOptions = drawerOptions(~drawerWidth=200, ());
 
-    let order = [Dashbord, Settings];
-
-    let getItem = tab =>
-      switch (tab) {
-      | Dashbord => (
-          "Dashbord",
-          (() => <Items.Dashboard />),
-          DrawerNavigation.screenOptions(~title="Info", ()),
-        )
+    let getItem = currentItem =>
+      switch (currentItem) {
+      | Dashbord => (<Items.Dashboard />, screenOptions(~drawerLabel="Info"))
       | Settings => (
-          "Settings",
-          (() => <Items.Settings />),
-          DrawerNavigation.screenOptions(~title="Settings", ()),
+          <Items.Settings />,
+          screenOptions(~drawerLabel="Settings"),
         )
       };
   });

@@ -21,9 +21,10 @@ module Dashboard = {
     ...compoennt,
     render: _self =>
       <SafeAreaView
-        style={
-          StyleSheet.flatten([Styles.container, Styles.dashboardContainer])
-        }>
+        style={StyleSheet.flatten([
+          Styles.container,
+          Styles.dashboardContainer,
+        ])}>
         <View> <Text style=Styles.titile> {str("Dashboard")} </Text> </View>
       </SafeAreaView>,
   };
@@ -36,9 +37,10 @@ module Settings = {
     ...compoennt,
     render: _self =>
       <SafeAreaView
-        style={
-          StyleSheet.flatten([Styles.container, Styles.settingsContainer])
-        }>
+        style={StyleSheet.flatten([
+          Styles.container,
+          Styles.settingsContainer,
+        ])}>
         <View> <Text style=Styles.titile> {str("Settings")} </Text> </View>
       </SafeAreaView>,
   };

@@ -35,7 +35,6 @@ module Stack =
           <Screen navigation text={"Browsing profile of: " ++ userId} />,
           screenOptions(~title="Hello " ++ userId, ()),
         )
-      | TabExample => (<TabExample navigation />, screenOptions())
       };
   });
 

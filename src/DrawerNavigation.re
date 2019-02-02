@@ -3,21 +3,21 @@ type navigation('a) = {navigate: 'a => unit};
 [@bs.deriving abstract]
 type drawerOptions = {
   [@bs.optional]
-  activeTintColor: string,
+  drawerWidth: int,
+  [@bs.optional]
+  useNativeAnimations: bool,
+  [@bs.optional]
+  drawerBackgroundColor: string,
 };
 
 [@bs.deriving abstract]
-type screenOptions = {
-  [@bs.optional]
-  title: string,
-};
+type screenOptions = {drawerLabel: string};
 
 module type TabConfig = {
   type item;
   let items: list(item);
   let drawerOptions: drawerOptions;
-  let getItem:
-    item => (string, unit => ReasonReact.reactElement, screenOptions);
+  let getItem: item => (ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: TabConfig) => {
@@ -33,10 +33,14 @@ module Create = (Config: TabConfig) => {
   let items =
     Config.items
     |> List.map(tab => {
-         let (tabname, screen, screenOptionsConfig) = Config.getItem(tab);
+         let (screen, screenOptionsConfig) = Config.getItem(tab);
+
          (
-           tabname,
-           routeConfig(~screen, ~navigationOptions=screenOptionsConfig),
+           drawerLabelGet(screenOptionsConfig),
+           routeConfig(
+             ~screen=() => screen,
+             ~navigationOptions=screenOptionsConfig,
+           ),
          );
        })
     |> Js.Dict.fromList;

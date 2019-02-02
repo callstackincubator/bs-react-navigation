@@ -2,9 +2,7 @@ open BsReactNavigation;
 
 type route =
   | Home
-  | UserDetails(string)
-  | TabExample;
-
+  | UserDetails(string);
 
 type navigationProp = StackNavigator.navigation(route);
 
@@ -17,9 +15,9 @@ type tabNavigationProp = TabNavigator.navigation;
 
 type navigation = StackNavigator.navigation(route);
 
-type loginRoute = 
+type loginRoute =
   | Login
-  | LoggedIn
+  | LoggedIn;
 
 type loginNavigation = SwitchNavigator.navigation(loginRoute);
 
