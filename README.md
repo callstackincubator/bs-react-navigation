@@ -11,6 +11,13 @@
 
 Currently we are not supporting the nested navigators.
 
+Supported navigators:
+
+- Stack Navigator
+- Switch Navigator
+- Tab Navigator
+- Drawer Navigator
+
 ## Installation
 
 Open a Terminal in your project's folder and run,
@@ -33,7 +40,7 @@ All of the navigators has similar API configuration flow.
 
 First of all, create a config file like `Config.re` and there define your all routes:
 
-> It is needed because ReasonML is aware of circular dependencies.
+> It is important to create a separate file for that because ReasonML is aware of circular dependencies.
 
 ```ReasonML
 type route =
@@ -44,45 +51,68 @@ type route =
 - `Home` - route without custom parameters
 - `User(string)` - route with parameters and their type is `string`
 
-Now, after we create navigator routes, we need to create navigator type, which is created from a list of your routes.
+### Navigation prop
+
+Now, after we create our routes, we need to create navigationProp type, which is created from a list of your routes.
 
 ```ReasonML
 type navigationProp = StackNavigator.navigation(route);
 ```
 
+Each component in `StackNavigator` gets navigation as a prop. The type for this navigation prop is from our `Config.re` file.
+
+The `navigation` prop allow us to do the `push` and add the new screen to the stack or `goBack` if we want to return to the previous screen.
+
+```ReasonML
+let make = (~navigation: Config.navigationProp, _children) => {
+  ...component,
+  render: _self =>
+    <View>
+      <Button
+        title="Go to home screen"
+        onPress={() => navigation.push(Home)}
+      />
+      <Button
+        title="Go to details screen"
+        onPress={() => navigation.push(UserDetails("string_as_param"))}
+      />
+      <Button
+        title="Go back"
+        onPress={() => navigation.goBack()}
+      />
+    </View>,
+};
+```
+
+### StackNavigator configuration
+
 The next step is to create actual navigator, for that, create a file where you will be put your navigator configuration. You need to use a functor `Create` from `StackNavigator` module and pass a configuration module which needs to include a few pieces:
 
 - `route` - list of your routes, use variant from your `Config.re`
 - `initialRoute` - the first screen of your navigation state
-- `getScreen` - it's a function which as a paramiters get the `currentRoute` and `navigation` props. As a return you should create a tuple where first elelment is a screen component and the second is screen configuration.
+- `getScreen` - it's a function which as a parameters get the `currentRoute` and `navigation` props. As a return, you should create a tuple where the first element is a screen component and the second is screen configuration.
 
-Full example:
+### Route Params
+
+If you route has a parameter you should pass them to you component inside `getScreen` function.
+
+exmaple:
 
 ```ReasonML
-open Config;
 
-module Stack =
-  StackNavigator.Create({
-    open StackNavigator;
-
-    type route = Config.route;
-
-    let initialRoute = Home;
-
-    let getScreen = (currentRoute, navigation) =>
-      switch (currentRoute) {
-      | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
-      | UserDetails(userId) => (
-          <Screen navigation text={"Browsing profile of: " ++ userId} />,
-          screenOptions(~title="Hello " ++ userId, ()),
-        )
-      };
-  });
+let getScreen = (currentRoute, navigation) =>
+  switch (currentRoute) {
+  | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
+  | UserDetails(userId) => (
+      <Screen navigation text={"Browsing profile of: " ++ userId} />,
+      screenOptions(~title="Hello " ++ userId, ()),
+    )
+  };
 ```
 
 ### Switch Navigator API
 
-The API is almost the same as in Stack Navigator
+The API for creating navigator is almost the same as in Stack Navigator:
 
 ```ReasonML
 module Switch =
@@ -120,22 +150,17 @@ module Drawer =
     type item = Config.item;
 
     let items = [Dashbord, Settings];
+
     let drawerOptions = drawerOptions(());
 
     let order = [Dashbord, Settings];
 
     let getItem = currentItem =>
       switch (currentItem) {
-      | Dashbord => (
-          <Items.Dashboard />,
-          screenOptions(~title="Info",
-        )
-      | Settings => (<Items.Settings />,
-          screenOptions(~title="Settings",
-        )
+      | Dashbord => (<Items.Dashboard />, screenOptions(~title="Info")
+      | Settings => (<Items.Settings />, screenOptions(~title="Settings")
       };
   });
-
 ```
 
 ### Tab Navigator API
@@ -154,8 +179,10 @@ Full example:
 module Tabs =
   TabNavigator.Create({
     open TabNavigator;
+    open Tabs;
 
     type tabs = Config.tabs;
+
     type order = list(tabs);
 
     let tabBarOptions =
@@ -165,18 +192,9 @@ module Tabs =
 
     let getTab = tab => {
       switch (tab) {
-      | Info => (
-          <Tabs.Info navigation/>,
-          screenOptions(~title="Info"),
-        )
-      | Profile => (
-          <Tabs.Profile navigation/>,
-          screenOptions(~title="Profile"),
-        )
-      | Settings => (
-          <Tabs.Settings navigation/>,
-          screenOptions(~title="Settings"),
-        )
+      | Info => (<Info navigation/>, screenOptions(~title="Info"))
+      | Profile => (<Profile navigation/>, screenOptions(~title="Profile"))
+      | Settings => (<Settings navigation/>, screenOptions(~title="Settings"))
       };
     };
   });
