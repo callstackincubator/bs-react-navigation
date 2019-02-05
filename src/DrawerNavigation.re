@@ -1,26 +1,64 @@
 type navigation('a) = {navigate: 'a => unit};
 
+type position =
+  | Left
+  | Right;
+
+type drawerType =
+  | Front
+  | Back
+  | Slide;
+
 [@bs.deriving abstract]
-type drawerOptions = {
+type options = {
   [@bs.optional]
-  drawerWidth: int,
+  width: int,
   [@bs.optional]
   useNativeAnimations: bool,
   [@bs.optional]
-  drawerBackgroundColor: string,
+  backgroundColor: string,
+  [@bs.optional]
+  swipeEnabled: bool,
+  [@bs.optional]
+  position,
+  [@bs.optional]
+  drawerType,
 };
 
 [@bs.deriving abstract]
-type screenOptions = {drawerLabel: string};
+type screenOptions = {title: string};
 
-module type TabConfig = {
+module type Config = {
   type item;
+
   let items: list(item);
-  let drawerOptions: drawerOptions;
+
+  let options: options;
   let getItem: item => (ReasonReact.reactElement, screenOptions);
 };
 
-module Create = (Config: TabConfig) => {
+let getPositionString = position =>
+  switch (position) {
+  | Some(p) =>
+    switch (p) {
+    | Left => "left"
+    | Right => "right"
+    }
+  | None => "right"
+  };
+
+let getDrawerTypeString = drawerType =>
+  switch (drawerType) {
+  | Some(t) =>
+    switch (t) {
+    | Front => "front"
+    | Back => "back"
+    | Slide => "slide"
+    }
+  | None => "front"
+  };
+
+module Create = (Config: Config) => {
   [@bs.deriving abstract]
   type navigatorConfig = {initialRouteName: string};
 
@@ -36,7 +74,7 @@ module Create = (Config: TabConfig) => {
          let (screen, screenOptionsConfig) = Config.getItem(tab);
 
          (
-           drawerLabelGet(screenOptionsConfig),
+           screenOptionsConfig->titleGet,
            routeConfig(
              ~screen=() => screen,
              ~navigationOptions=screenOptionsConfig,
@@ -46,8 +84,13 @@ module Create = (Config: TabConfig) => {
     |> Js.Dict.fromList;
 
   let drawerConfig = {
-    "swipeEnabled": true,
-    "drawerOptions": Config.drawerOptions,
+    "swipeEnabled": Config.options->swipeEnabledGet,
+    "drawerOptions": {
+      "drawerBackgroundColor": Config.options->backgroundColorGet,
+      "drawerWidth": Config.options->widthGet,
+      "drawerPosition": getPositionString(Config.options->positionGet),
+      "drawerType": getDrawerTypeString(Config.options->drawerTypeGet),
+    },
   };
 
   /* navigator */

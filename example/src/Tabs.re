@@ -1,5 +1,4 @@
 open BsReactNative;
-open Config;
 let str = ReasonReact.string;
 
 module Styles = {
