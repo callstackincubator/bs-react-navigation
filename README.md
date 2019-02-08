@@ -9,7 +9,7 @@
 
 ## Status
 
-Currently we are not supporting the nested navigators.
+> Currently we are not supporting the nested navigators.
 
 Supported navigators:
 
@@ -142,7 +142,6 @@ Full example:
 module Tabs =
   TabNavigator.Create({
     open TabNavigator;
-    open Tabs;
 
     type tabs = Config.tabs;
 
@@ -152,9 +151,9 @@ module Tabs =
 
     let getTab = tab => {
       switch (tab) {
-      | Info => (<Info navigation/>, screenOptions(~title="Info"))
-      | Profile => (<Profile navigation/>, screenOptions(~title="Profile"))
-      | Settings => (<Settings navigation/>, screenOptions(~title="Settings"))
+      | Info => (<Tabs.Info navigation/>, screenOptions(~title="Info"))
+      | Profile => (<Tabs.Profile navigation/>, screenOptions(~title="Profile"))
+      | Settings => (<Tabs.Settings navigation/>, screenOptions(~title="Settings"))
       };
     };
   });
