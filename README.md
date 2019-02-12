@@ -38,7 +38,7 @@ For all navigator you need follow some steps:
 
 ### Config
 
-First of all, create a config file like `Config.re` and there define your all routes. It sould be a simple Varian Type with your routes/tabs/items
+First of all, create a config file like `Config.re` and there define your all routes. It sould be a simple Variant Type with your routes/tabs/items
 
 ```ReasonML
 type route =
@@ -46,17 +46,17 @@ type route =
   | UserDetails;
 ```
 
-> It is important to create a separate file for that because ReasonML is aware of circular dependencies.
+> It is important to create a separate file in order to avoid circular dependencies when you try to import navigation dependencies.
 
 ### Navigation prop for compoenents
 
-For our components we need to create navigationProp type, which is created from a list of our routes defined in [Confgi.re](#Config).
+For our components we need to create navigationProp type, which is created from a list of our routes defined in [Config.re](#Config).
 
 ```ReasonML
 type navigationProp = StackNavigator.navigation(route);
 ```
 
-> Each Navigator expose their own navitationProp type.
+> Each Navigator provides their own navitationProp type.
 
 Example:
 
@@ -130,8 +130,6 @@ module Switch =
 
 Tab needs one additional setting compared to the Switch or Stack Navigator.
 
-This is list of items that drawer needs to render itself:
-
 ```ReasonML
 let order: list(tabs);
 ```
@@ -162,8 +160,6 @@ module Tabs =
 ### DrawerNavigator
 
 Drawer needs one additional setting compared to the Switch or Stack Navigator.
-
-This is list of items that drawer needs to render itself:
 
 ```ReasonML
 let items: list(item);
