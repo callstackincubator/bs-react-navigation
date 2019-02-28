@@ -7,7 +7,18 @@
 
 > A fast, declarative navigation for React Native, based on React Navigation
 
-### Installation
+## Status
+
+> Currently we are not supporting the nested navigators.
+
+Supported navigators:
+
+- [Stack Navigator](#StackNavigator)
+- [Switch Navigator](#SwitchNavigator)
+- [Tab Navigator](#TabNavigator)
+- [Drawer Navigator](#DrawerNavigator)
+
+## Installation
 
 Open a Terminal in your project's folder and run,
 
@@ -19,7 +30,162 @@ After installation, you will need to install `react-navigation` and its peer dep
 
 ## Examples
 
-- example built-in library - [/example](/example)
+- example built-in library - check [/example](/example)
+
+## API
+
+For all navigator you need follow some steps:
+
+### Config
+
+First of all, create a config file like `Config.re` and there define your all routes. It sould be a simple Variant Type with your routes/tabs/items
+
+```ReasonML
+type route =
+  | Home
+  | UserDetails;
+```
+
+> It is important to create a separate file in order to avoid circular dependencies when you try to import navigation dependencies.
+
+### Navigation prop for compoenents
+
+For our components we need to create navigationProp type, which is created from a list of our routes defined in [Config.re](#Config).
+
+```ReasonML
+type navigationProp = StackNavigator.navigation(route);
+```
+
+> Each Navigator provides their own navitationProp type.
+
+Example:
+
+```ReasonML
+let make = (~navigation: Config.navigationProp, _children) => {
+  ...component,
+  render: _self =>
+    <View>
+      <Button
+        title="Go to home screen"
+        onPress={() => navigation.push(Home)}
+      />
+      <Button
+        title="Go back"
+        onPress={() => navigation.goBack()}
+      />
+    </View>,
+};
+```
+
+### StackNavigator
+
+#### Configuration
+
+Use a functor `Create` from `StackNavigator` module and pass a configuration module which needs to include a few pieces:
+
+- `route` - list of your routes, use variant from your `Config.re`
+- `initialRoute` - the first screen of your navigation state
+- `getScreen` - it's a function which as a parameters get the `currentRoute` and `navigation` props. As a return, you should create a tuple where the first element is a screen component and the second is screen configuration.
+
+#### Route Params
+
+If your route has a parameter you should pass them to you component inside `getScreen` function.
+
+exmaple:
+
+```ReasonML
+
+let getScreen = (currentRoute, navigation) =>
+  switch (currentRoute) {
+  | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
+  | UserDetails(userId) => (
+      <Screen navigation text={"Browsing profile of: " ++ userId} />,
+      screenOptions(~title="Hello " ++ userId, ()),
+    )
+  };
+```
+
+### SwitchNavigator
+
+The API for creating navigator is almost the same as in Stack Navigator:
+
+```ReasonML
+module Switch =
+  SwitchNavigator.Create({
+    open SwitchNavigator;
+
+    type route = Config.route;
+
+    let initialRoute = Login;
+
+    let getScreen = (currentRoute, navigation) =>
+      switch (currentRoute) {
+      | Login => (<Login navigation />, screenOptions())
+      | LoggedIn => (<LoggedIn navigation />, screenOptions())
+      };
+  });
+```
+
+### TabNavigator
+
+Tab needs one additional setting compared to the Switch or Stack Navigator.
+
+```ReasonML
+let order: list(tabs);
+```
+
+Full example:
+
+```ReasonML
+module Tabs =
+  TabNavigator.Create({
+    open TabNavigator;
+
+    type tabs = Config.tabs;
+
+    let options = options(~activeTintColor="#847", ());
+
+    let order = [Info, Profile, Settings];
+
+    let getTab = tab => {
+      switch (tab) {
+      | Info => (<Tabs.Info navigation/>, screenOptions(~title="Info"))
+      | Profile => (<Tabs.Profile navigation/>, screenOptions(~title="Profile"))
+      | Settings => (<Tabs.Settings navigation/>, screenOptions(~title="Settings"))
+      };
+    };
+  });
+```
+
+### DrawerNavigator
+
+Drawer needs one additional setting compared to the Switch or Stack Navigator.
+
+```ReasonML
+let items: list(item);
+```
+
+Full example:
+
+```ReasonML
+module Drawer =
+  DrawerNavigation.Create({
+    open DrawerNavigation;
+    type item = Config.item;
+
+    let items = [Dashbord, Settings];
+
+    let options = options(~width=150, ());
+
+    let order = [Dashbord, Settings];
+
+    let getItem = currentItem =>
+      switch (currentItem) {
+      | Dashbord => (<Items.Dashboard />, screenOptions(~title="Info")
+      | Settings => (<Items.Settings />, screenOptions(~title="Settings")
+      };
+  });
+```
 
 ## Prior art
 
