@@ -1,6 +1,6 @@
 {
   "name": "bs-react-navigation",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
@@ -34,8 +34,6 @@
     "react-navigation": "^3.0.5",
     "react-navigation-drawer": "^1.0.5",
     "react-navigation-stack": "^1.0.5",
-    "@react-navigation/core": "^3.0.1",
-    "@react-navigation/native": "^3.0.3",
     "react-navigation-tabs": "1.0.1",
     "reason-react": "^0.5.3"
   },
