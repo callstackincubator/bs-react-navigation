@@ -37,17 +37,11 @@ module Stack =
       switch (route) {
       | Home => (
           <Screen navigation />,
-          screenOptions(
-            ~title="Home",
-            ~headerStyle,
-            ~headerTitleStyle,
-            ~headerTintColor,
-            (),
-          ),
+          screenOptions(~title="Home", ~headerStyle, ~headerTitleStyle, ()),
         )
       | UserDetails(userId) => (
           <Screen navigation text={"Browsing profile of: " ++ userId} />,
-          screenOptions(~title="Hello " ++ userId, ()),
+          screenOptions(~title="Hello " ++ userId, ~headerTintColor, ()),
         )
       };
   });
